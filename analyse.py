@@ -38,6 +38,12 @@ with open("sleep_data.json") as f:
 	data = json.load(f)
 	all_days, months, weeks = analyse(data)
 	print "months\n--------"
-	pprint(sorted(months.items()))
+	for month, sleep in sorted(months.items()):
+		print "{}: {} good, {} ok, {} meh".format(
+			month, sleep["good"], sleep["ok"], sleep["meh"]
+		)
 	print "\nweeks\n---------"
-	pprint(sorted(weeks.items()))
+	for week, sleep in sorted(weeks.items()):
+		print "{}: {} good, {} ok, {} meh".format(
+			week, sleep["good"], sleep["ok"], sleep["meh"]
+			)
