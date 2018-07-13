@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 import json
 from collections import Counter, defaultdict
+from pprint import pprint 
+
 
 def classify(start_minutes, duration_hours):
 	if start_minutes < 3.25 and duration_hours > 8: #before 11:15
@@ -9,8 +11,7 @@ def classify(start_minutes, duration_hours):
 		return "ok"
 	else:
 		return "meh"
-	
-	
+
 def analyse(data):
 	all_days = []
 	weeks = defaultdict(lambda :Counter())
@@ -20,7 +21,7 @@ def analyse(data):
 		stop = datetime.strptime(day["stop"], "%Y-%m-%dT%H:%M:%S")
 		if start.hour < 20:	# must have gone to bed past midnight
 			start_hours = 4 + start.hour + start.minute / 60.0
-			start = start - time5delta(1)
+			start = start - timedelta(1)
 		else:
 			start_minutes = start.hour - 20  + start.minute / 60.0
 		duration_hours = (stop - start).total_seconds() / 3600
@@ -32,7 +33,11 @@ def analyse(data):
 			].update([classification])
 	return all_days, months, weeks
 
-	
+
 with open("sleep_data.json") as f:
 	data = json.load(f)
 	all_days, months, weeks = analyse(data)
+	print "months\n--------"
+	pprint(sorted(months.items()))
+	print "\nweeks\n---------"
+	pprint(sorted(weeks.items()))
