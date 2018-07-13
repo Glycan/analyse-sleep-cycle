@@ -9,7 +9,7 @@ months
  ('2018-04', Counter({'good': 3, 'ok': 3, 'meh': 3})),
  ('2018-05', Counter({'meh': 12, 'ok': 9, 'good': 6})),
  ('2018-06', Counter({'ok': 12, 'meh': 10, 'good': 4})),
- ('2018-07', Counter({'good': 4, 'ok': 3, 'meh': 1}))]
+ ('2018-07', Counter({'good': 7, 'ok': 4, 'meh': 1}))]
 
 weeks
 ---------
@@ -51,4 +51,4 @@ weeks
  ('2018-06 week #3', Counter({'meh': 4, 'ok': 3})),
  ('2018-06 week #4', Counter({'ok': 2})),
  ('2018-07 week #0', Counter({'good': 3, 'ok': 3})),
- ('2018-07 week #1', Counter({'good': 1, 'meh': 1}))]
+ ('2018-07 week #1', Counter({'good': 4, 'ok': 1, 'meh': 1}))]
