@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import json
 from collections import Counter, defaultdict
 from pprint import pprint 
-
+import sys
 
 def classify(start_hours, duration_hours):
 	if start_hours < 3.25 and duration_hours > 8: #before 11:15
@@ -37,13 +37,17 @@ def analyse(data):
 with open("sleep_data.json") as f:
 	data = json.load(f)
 	all_days, months, weeks = analyse(data)
+	if sys.argv[-1] == "--csv":
+		line = "{},{},{},{}"
+	else:
+		line = "{}: {} good, {} ok, {} meh"
 	print "months\n--------"
 	for month, sleep in sorted(months.items()):
-		print "{}: {} good, {} ok, {} meh".format(
+		print line.format(
 			month, sleep["good"], sleep["ok"], sleep["meh"]
 		)
 	print "\nweeks\n---------"
 	for week, sleep in sorted(weeks.items()):
-		print "{}: {} good, {} ok, {} meh".format(
+		print line.format(
 			week, sleep["good"], sleep["ok"], sleep["meh"]
 			)
