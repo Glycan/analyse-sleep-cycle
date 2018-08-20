@@ -4,10 +4,10 @@ from collections import Counter, defaultdict
 from pprint import pprint 
 
 
-def classify(start_minutes, duration_hours):
-	if start_minutes < 3.25 and duration_hours > 8: #before 11:15
+def classify(start_hours, duration_hours):
+	if start_hours < 3.25 and duration_hours > 8: #before 11:15
 		return "good"
-	elif start_minutes < 3.75 and duration_hours > 7.5: #before 11:45
+	elif start_hours < 3.75 and duration_hours > 7.5: #before 11:45
 		return "ok"
 	else:
 		return "meh"
@@ -23,9 +23,9 @@ def analyse(data):
 			start_hours = 4 + start.hour + start.minute / 60.0
 			start = start - timedelta(1)
 		else:
-			start_minutes = start.hour - 20  + start.minute / 60.0
+			start_hours = start.hour - 20  + start.minute / 60.0
 		duration_hours = (stop - start).total_seconds() / 3600
-		classification = classify(start_minutes, duration_hours)
+		classification = classify(start_hours, duration_hours)
 		all_days.append([start.strftime("%Y-%m-%d"), classification])
 		months[start.strftime("%Y-%m")].update([classification])
 		weeks[
